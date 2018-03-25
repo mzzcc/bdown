@@ -17,8 +17,8 @@
       <pubDate>Sun, 25 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/03/25/ola-blogdown/</guid>
-      <description>Teeeeeeeeeste. Alo.
-plot(iris)</description>
+      <description>Eu comecei este site por causa do pacote blogdown. Este pacote permite que que você escreva um documento em RMarkdown e faça o upload dele para um site diretamente do RStudio. Qual a graça disso? Vamos começar do começo.
+RMarkdown é um tipo de documento que permite que você junte texto (incluindo equações) e código de R num mesmo lugar. Você abre o RStudio, carrega seus dados, roda umas regressões, plota uns gráficos, descreve os resultados, e tudo vira um relatório 100% reprodutível1.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@ plot(iris)</description>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/about/</guid>
-      <description>Sou um estudante de economia interressado principalmente em comércio internacional. Aqui no blog vou testando o que vou aprendendo no R. Você pode me encontrar no Twitter. Neste post explico um pouco melhor o porquê disto tudo.</description>
+      <description>Sou um estudante de economia interessado principalmente em comércio internacional. Aqui no blog vou testando o que vou aprendendo no R. Você pode me encontrar no Twitter. Neste post explico um pouco melhor o porquê disto tudo.</description>
     </item>
     
   </channel>

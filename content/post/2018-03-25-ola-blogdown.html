@@ -11,6 +11,67 @@ tags:
 
 
 
-<p>Teeeeeeeeeste. Alo.</p>
-<pre class="r"><code>plot(iris)</code></pre>
-<p><img src="/post/2018-03-25-ola-blogdown_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Eu comecei este site por causa do pacote blogdown. Este pacote permite que que você escreva um documento em RMarkdown e faça o upload dele para um site diretamente do RStudio. Qual a graça disso? Vamos começar do começo.</p>
+<p><a href="https://rmarkdown.rstudio.com/">RMarkdown</a> é um tipo de documento que permite que você junte texto (incluindo equações) e código de R num mesmo lugar. Você abre o RStudio, carrega seus dados, roda umas regressões, plota uns gráficos, descreve os resultados, e tudo vira um relatório 100% reprodutível<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. O relatório pode ser compilado como um arquivo .pdf, .html ou mesmo argh, .doc. Então, nunca mais esse negócio de gerar gráficos no R, exportar para um .jpeg, abrir o Word ou similar, e copiar manualmente<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Em um Rmarkdown, tudo acontece no mesmo lugar. Bem conveniente.</p>
+<p>O que o pacote blogdown faz é levar isso para a internet. Você pode montar um site inteiro com RMarkdown, mas vamos focar em um blog. Você tem uma ideia, escreve um post em Markdown, dá uns dois ou três cliques, e isto vai parar no seu blog online. Bem conveniente ao quadrado.</p>
+<p>Exceto por um pequeno problema. Não é tão fácil assim fazer todas as configurações necessárias para deixar tudo pronto para esses dois ou três cliques acontecerem. Se você não tem a mínima ideia de como um site funciona (assim como eu), ler o manual do <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> só vai te desencorajar (como me desencorajou por um bom tempo). O que aconteceu comigo foi ter topado por acaso em um <a href="https://www.youtube.com/watch?v=syWAKaj-4ck">tutorial</a> no Youtube.</p>
+<p>A seguir, vou resumir rapidamente como funciona todo o processo, supondo um conhecimento básico de R e tendo o RStudio instalado. A ideia não é fazer um tutorial detalhado, mas sim explicar como as coisas se encaixam. Após ler o post, veja o vídeo para os detalhes e mão na massa. Em cada um dos passos vou deixar um link com mais informações.</p>
+<div id="preliminares" class="section level1">
+<h1>Preliminares</h1>
+<p>O resumo da história é o seguinte. Você usa o RStudio e o pacote blogdown para montar seus posts (e outras páginas do site), escrevendo documentos em RMarkdown. O pacote blogdown faz uma primeira mágica, transformando seus arquivos RMarkdown em um site bonitinho através do Hugo. O que é Hugo? É um <em>static site generator</em>, basicamente um aplicativo pra gerar um monte de arquivos html que vão ser colocados online em algum lugar. Existem vários templates prontos; quando você gera o site através do blogdown, você tem a opção de escolher o template que mais lhe agrada. Essa primeira mágica já deixa o site prontinho; inclusive você pode visualizar ele dentro do RStudio. Vamos em frente.</p>
+<p>O segunda mágica é colocar tudo online. Para isso, vamos fazer o upload do site para o <a href="www.github.com">GitHub</a>. O que é GiHub? É um serviço de hospedagem de projetos que usam controle de versão <a href="https://git-scm.com/">Git</a>. Quer saber mais sobre controle de versão e Git? <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">Aqui</a> e <a href="https://ourcodingclub.github.io/2017/02/27/git.html">Aqui</a>. Você precisa saber sobre controle de versão? Não! Pense somente que este é o lugar para onde aqueles dois, três cliques dentro do RStudio vão mandar o site. O seu site hospedado no Github vai estar ligado ao <a href="https://www.netlify.com/">Netlify</a>, um serviço que implanta sites estáticos, e é onde as pessoas vão acessar o seu site. A segunda mágica então é essa: os dois, três cliques irão mandar a página para o GitHub, onde o Netlify automagicamente irá ler qualquer alteração que você fizer (um post novo por exemplo) e hospedará o blog.</p>
+<p>Este é um resumo tosco do processo. Não é exatamente o que acontece, mas se alguém tivesse me explicado desta maneira talvez eu tivesse feito este blog antes.</p>
+<p>Então vamos precisar de:</p>
+<ul>
+<li>RStudio e o pacote blogdown instalado;</li>
+<li>Uma conta no Github e o Git instalado;</li>
+<li>Uma conta no Netlify.</li>
+</ul>
+</div>
+<div id="passo-1-git-e-github" class="section level1">
+<h1>Passo 1: Git e Github</h1>
+<p>Git é um software para controle de versão, e GitHub um serviço de hospedagem para projetos colaborativos que usam Git. <em>Happy Git and GitHub for the useR</em> é um tutorial detalhado de como usar Git/GitHub e RStudio.</p>
+<ol style="list-style-type: decimal">
+<li>Instale Git para <a href="https://gitforwindows.org/">Windows</a></li>
+<li>Faça uma conta no <a href="https://github.com/">Github</a></li>
+<li>Configure o RStudio, lendo o capítulo 8 do <a href="http://happygitwithr.com/hello-git.html">HappyGit</a></li>
+<li>Vá ao GitHub e crie um repositório, por exemplo <code>bdown</code>. Ele ficará hospedado em www.github.com/seu_user_name/bdown.</li>
+<li>Inicie um projeto novo no RStudio com controle de versão. Não sabe para que servem projetos no RStudio? Pare tudo e leia <a href="http://r4ds.had.co.nz/workflow-projects.html">aqui</a>. Isto é mais importante que montar um blog! Continuando, na configuração do projeto, coloque o link do seu repositório do GitHub.</li>
+</ol>
+</div>
+<div id="passo-2-blogdown" class="section level1">
+<h1>Passo 2: Blogdown</h1>
+<ol style="list-style-type: decimal">
+<li><p>Instale o pacote blogdown usando <code>install.packages(&quot;blogdown&quot;)</code>, ou indo em <em>Tools</em> -&gt; <em>Install Packages …</em></p></li>
+<li><p>Agora vem a parte trabalhosa. Crie seu site! O blogdown tem um comando chamado <code>new_site()</code>. Este comando criará toda a estrutura de um site, com alguns posts de exemplo, e usando o template <code>lithium</code>, o mesmo que utilizo aqui. Todo o seu site offline ficará na pasta <code>\content</code>. Crie novos posts com <code>new_post()</code>, ou utilizando o Addin <em>New Post</em>. Utilize <code>serve_site()</code> para compilar o site e visualizá-lo no Viewer - também disponível como Addin. O seu site ficará na pasta <code>\public</code>.</p></li>
+<li><p>Mande o site para o Github. Vá em <em>Tools</em> -&gt; <em>Version Control</em>, selecione todas as mudanças e clique em <em>commit</em>. Depois clique em <em>Pull</em> para mandar para o GitHub. Neste passo provavelmente eu deveria explicar melhor o que é controle de versão e como ele funciona. Veja o vídeo tutorial e leia o HappyGit para entender melhor como isso funciona.</p></li>
+</ol>
+</div>
+<div id="passo-3-netlify" class="section level1">
+<h1>Passo 3: Netlify</h1>
+<p>Agora que o site está no seu repositório do GitHub, vamos conectá-lo ao Netlify.</p>
+<ol style="list-style-type: decimal">
+<li><p>Crie uma conta no <a href="https://www.netlify.com/">Netlify</a> usando seu usuário do Github.</p></li>
+<li><p>Clique em <em>New Site from Git</em>. Depois selecione <em>GitHub</em>. Selecione o repositório que contém o site, e no campo <em>Publish Directory</em> escreva <code>Public</code>, que é a pasta onde consta o site pronto para publicação.</p></li>
+<li><p>Pronto. Seu site está online, no endereço www.nome_aleatorio_com_numeros.netlify.com. Clique na opção para mudar o nome do site para algo como www.meu_nome.netlify.com. Caso você queira investir, compre um domínio do Google e link o netlify para seu domínio www.meu_nome.com.</p></li>
+</ol>
+</div>
+<div id="atualizando-o-site" class="section level1">
+<h1>Atualizando o site</h1>
+<p>Toda vez que você quiser fazer um post siga estes passos:</p>
+<ol style="list-style-type: decimal">
+<li>Abra o projeto do RStudio.</li>
+<li>Crie um post com <code>new_post()</code></li>
+<li>Compile o site com <code>serve_site()</code></li>
+<li>Commit e Push o site para o GitHub.</li>
+</ol>
+<p>Pronto, o Netlify irá ler as mudanças no GitHub.</p>
+<p>Gostaria de explicar muito mais coisas neste post, mas na verdade eu ainda não entendo metade das coisas que estão acontecendo. Espero que o post sirva ao menos para esclarecer de uma maneira geral como funciona.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Mais sobre pesquisa reprodutível <a href="http://ropensci.github.io/reproducibility-guide/sections/introduction/">aqui</a>.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Rmarkdown também não é a solução para tudo. Se você estiver fazendo um documento mais complexo - uma tese ou dissertação por exemplo, com 99% de chance de isto ser feito em Latex - uma opção é salvar todos os seus outputs do R em uma pasta e ler todos a partir do seu .tex. Um próximo post talvez fale sobre o pacote <strong>book</strong>down e como escrever livros com Rmarkdown.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
