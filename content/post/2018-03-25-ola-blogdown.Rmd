@@ -1,0 +1,17 @@
+---
+title: Olá, Blogdown!
+author: Bruno
+date: '2018-03-25'
+slug: ola-blogdown
+categories:
+  - R
+tags:
+  - blogdown
+---
+
+Teeeeeeeeeste. Alo.
+
+```{r}
+plot(iris)
+```
+
